@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import bo.Client;
@@ -58,6 +59,11 @@ public class CommandeService {
 		cmd=null;
 		createCommandDTO();
 		
+	}
+
+
+	public List<Commande> getAllCommandes() {
+		return new CommandeDAO().findAll();
 	}
 
 }

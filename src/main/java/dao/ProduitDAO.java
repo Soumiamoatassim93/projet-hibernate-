@@ -57,4 +57,50 @@ public void update(Produit produit){
 
 	
 }
+
+public Produit findById(int id) {
+    Transaction tx = null;
+    Produit p = null;
+    try {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        p = session.find(Produit.class, id);
+        tx.commit();
+        session.close();
+        return p;
+    } catch (HibernateException e) {
+        tx.rollback();
+        e.printStackTrace();
+        return p;
+    }
+}
+
+public void create(Produit produit) {
+    Transaction tx = null;
+    try {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.save(produit);
+        tx.commit();
+        session.close();
+    } catch (HibernateException e) {
+        tx.rollback();
+        e.printStackTrace();
+    }
+}
+
+public boolean delete(Produit produit) {
+    Transaction tx = null;
+    try {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.delete(produit);
+        tx.commit();
+        session.close();
+        return true;
+    } catch (HibernateException e) {
+        tx.rollback();
+        return false;
+    }
+}
 }

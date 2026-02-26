@@ -51,4 +51,37 @@ public class ProduitService implements ProduitServiceInterface{
 		}
 		
 	}
+	
+	
+	@Override
+	public void create(ProduitDTO dto) {
+	    new ProduitDAO().create(this.toProduit(dto));
+	}
+
+	@Override
+	public void update(ProduitDTO dto, int id) {
+	    ProduitDAO dao = new ProduitDAO();
+	    Produit p = dao.findById(id);
+	    if (p != null) {
+	        Produit updated = this.toProduit(dto);
+	        updated.setId(id);
+	        dao.update(updated);
+	    }
+	}
+
+	@Override
+	public boolean delete(int id) {
+	    ProduitDAO dao = new ProduitDAO();
+	    Produit p = dao.findById(id);
+	    if (p != null) return dao.delete(p);
+	    return false;
+	}
+
+	@Override
+	public ProduitDTO getProduitDTO(int id) {
+	    ProduitDAO dao = new ProduitDAO();
+	    Produit p = dao.findById(id);
+	    if (p != null) return this.fromProduit(p);
+	    throw new RuntimeException("Produit introuvable!");
+	}
 }

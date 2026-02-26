@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 
 
 @Entity
+@Table(name = "ligne_commande")
+
 public class Ligne_Commande implements Serializable{
 	
 @Id
@@ -18,11 +20,11 @@ private int quantite;
 private float sous_total;
 
 @ManyToOne
-@JoinColumn(name="id")
+@JoinColumn(name = "produit_id")
 private Produit produit;
 
 @ManyToOne
-@JoinColumn(name="idcmd")
+@JoinColumn(name = "commande_id")
 private Commande commande;
 
 

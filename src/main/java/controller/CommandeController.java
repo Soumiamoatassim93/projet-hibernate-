@@ -2,7 +2,9 @@ package controller;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
+import bo.Commande;
 import dto.ClientDTO;
 import dto.CommandeDTO;
 import dto.Ligne_CommandeDTO;
@@ -35,6 +37,10 @@ public CommandeDTO getCommande() {
 	public void initialiserCommande() {
 		new CommandeService().initialiserCommande();
 		
+	}
+
+	public List<Commande> getAllCommandes() {
+		return new CommandeService().getAllCommandes();
 	}
 
 }
