@@ -24,14 +24,14 @@ public class Form_ListeCommandes extends JFrame {
     private List<Commande> listeCommandes;
 
     // Couleurs modernes
-    private final Color PRIMARY_COLOR = new Color(52, 73, 94);        // Gris foncé
-    private final Color ACCENT_COLOR = new Color(41, 128, 185);      // Bleu
-    private final Color SUCCESS_COLOR = new Color(46, 204, 113);     // Vert
-    private final Color BACKGROUND_COLOR = new Color(236, 240, 241); // Gris clair
+    private final Color PRIMARY_COLOR = new Color(52, 73, 94);
+    private final Color ACCENT_COLOR = new Color(41, 128, 185);
+    private final Color SUCCESS_COLOR = new Color(46, 204, 113);
+    private final Color BACKGROUND_COLOR = new Color(236, 240, 241);
     private final Color PANEL_COLOR = Color.WHITE;
-    private final Color HEADER_BG = new Color(52, 73, 94);           // Gris foncé
+    private final Color HEADER_BG = new Color(52, 73, 94);
     private final Color HEADER_FG = Color.WHITE;                     // Blanc
-    private final Color SELECTION_BG = new Color(41, 128, 185, 50);  // Bleu transparent
+    private final Color SELECTION_BG = new Color(41, 128, 185, 50);
 
     public Form_ListeCommandes() {
         setTitle("📋 Gestion des Commandes");
@@ -164,18 +164,15 @@ public class Form_ListeCommandes extends JFrame {
         table.setSelectionForeground(Color.BLACK);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        // === STYLE DE L'EN-TÊTE - SOLUTION SIMPLE ET EFFICACE ===
         JTableHeader header = table.getTableHeader();
         header.setDefaultRenderer(new HeaderRenderer());
         header.setBackground(HEADER_BG);
         header.setForeground(HEADER_FG);
         header.setFont(new Font("Segoe UI", Font.BOLD, 13));
 
-        // Renderer pour centrer certaines colonnes
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
-        // Renderer pour aligner à droite les montants
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
 
@@ -216,7 +213,6 @@ public class Form_ListeCommandes extends JFrame {
                                                        int row, int column) {
             super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-            // Maintenir les couleurs même si sélectionné
             setBackground(HEADER_BG);
             setForeground(HEADER_FG);
 
@@ -282,9 +278,7 @@ public class Form_ListeCommandes extends JFrame {
         tableCommandes.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
 
-    // ============================
-    // NOUVELLE MÉTHODE : CALCULER LE NOMBRE TOTAL D'ARTICLES
-    // ============================
+
     private int calculerNombreTotalArticles(Commande commande) {
         int total = 0;
         for (Ligne_Commande l : commande.getLignes()) {
@@ -293,9 +287,7 @@ public class Form_ListeCommandes extends JFrame {
         return total;
     }
 
-    // ============================
-    // AFFICHER LES LIGNES AVEC CALCUL
-    // ============================
+
     private void afficherLignesAvecCalcul(int index) {
         if (index < 0 || index >= listeCommandes.size()) {
             return;
@@ -343,7 +335,6 @@ public class Form_ListeCommandes extends JFrame {
             data.add(row);
         }
 
-        // Ajouter une ligne de total
         if (!data.isEmpty()) {
             Vector<Object> totalRow = new Vector<>();
             totalRow.add("TOTAL");
@@ -353,7 +344,6 @@ public class Form_ListeCommandes extends JFrame {
             data.add(totalRow);
         }
 
-        // Rendre les cellules non éditables
         DefaultTableModel model = new DefaultTableModel(data, titres) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -376,8 +366,7 @@ public class Form_ListeCommandes extends JFrame {
                     if (row == table.getRowCount() - 1) {
                         c.setFont(new Font("Segoe UI", Font.BOLD, 12));
                         c.setBackground(new Color(240, 240, 240));
-                    } else {
-                        c.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+                    } else {c.setFont(new Font("Segoe UI", Font.PLAIN, 12));
                         // Alternance des couleurs de lignes
                         if (isSelected) {
                             c.setBackground(SELECTION_BG);
